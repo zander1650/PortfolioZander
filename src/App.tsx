@@ -3,7 +3,6 @@ import './App.css'
 import soilSenImg1 from './assets/SoilSen.jpg'
 import soilSenImg2 from './assets/SoilSen2.jpg'
 import capconportImg from './assets/Capconport.jpg'
-import videoDemoSrc from './assets/Video Demo .mp4'
 import stockImg1 from './assets/Stock1.png'
 import stockImg2 from './assets/Stock2.png'
 import stockImg3 from './assets/Stock3.png'
@@ -28,7 +27,7 @@ const projects = [
     tags: ['React Native', 'Expo', 'Google Maps API', 'AWS', 'GitHub', 'Jira'],
     github: 'https://github.com/zander1650',
     demo: null,
-    video: videoDemoSrc,
+    video: 'https://www.youtube.com/embed/hRCyR5hYK3A',
     images: [
       { src: capconportImg, alt: 'Osperity team presenting at SAIT Capstone Convention' },
     ],
@@ -252,13 +251,14 @@ function Work() {
                     <div className={`work__media${p.video && p.images && p.images.length > 0 ? ' work__media--split' : ''}`}>
                       {p.video ? (
                         <div className="work__video-wrap">
-                          <video
+                          <iframe
                             className="work__video"
                             src={p.video}
-                            controls
-                            playsInline
-                            preload="metadata"
-                            aria-label={`${p.title} video demo`}
+                            title={`${p.title} video demo`}
+                            loading="lazy"
+                            referrerPolicy="strict-origin-when-cross-origin"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            allowFullScreen
                           />
                         </div>
                       ) : null}
