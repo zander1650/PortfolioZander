@@ -443,8 +443,24 @@ function Contact() {
   const [sent, setSent] = useState(false)
   const formRef = useRef<HTMLFormElement>(null)
 
-  function handleSubmit(e: React.FormEvent) {
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
+
+    const form = e.currentTarget
+    if (!form.checkValidity()) {
+      form.reportValidity()
+      return
+    }
+
+    const formData = new FormData(form)
+    const name = String(formData.get('name') ?? '').trim()
+    const email = String(formData.get('email') ?? '').trim()
+    const message = String(formData.get('message') ?? '').trim()
+
+    const subject = encodeURIComponent(`Portfolio contact from ${name || 'Website Visitor'}`)
+    const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${message}`)
+
+    window.location.href = `mailto:Zander28fields@gmail.com?subject=${subject}&body=${body}`
     setSent(true)
     formRef.current?.reset()
   }
@@ -462,7 +478,7 @@ function Contact() {
 
         <p className="contact__or">Or use the form below.</p>
 
-        <form className="contact__form" ref={formRef} onSubmit={handleSubmit} noValidate>
+        <form className="contact__form" ref={formRef} onSubmit={handleSubmit}>
           {sent ? (
             <p className="contact__sent">
               Sent. I'll reply within a day or two.{' '}
