@@ -116,8 +116,8 @@ function Nav() {
       >
         ZF
       </button>
-      <a href="/resume.pdf" className="nav__resume" target="_blank" rel="noopener noreferrer">
-        résumé.pdf
+      <a href="/resume.pdf" className="nav__resume" download="Zander-Fields-Resume.pdf">
+        resume
       </a>
     </nav>
   )
