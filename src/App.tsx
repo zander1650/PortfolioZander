@@ -27,7 +27,7 @@ const projects = [
     tags: ['React Native', 'Expo', 'Google Maps API', 'AWS', 'GitHub', 'Jira'],
     github: 'https://github.com/zander1650',
     demo: null,
-    video: 'https://www.youtube.com/embed/hRCyR5hYK3A',
+    video: 'https://www.youtube.com/embed/hRCyR5hYK3A?autoplay=1&mute=1&loop=1&playlist=hRCyR5hYK3A&controls=1&fs=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1',
     images: [
       { src: capconportImg, alt: 'Osperity team presenting at SAIT Capstone Convention' },
     ],
@@ -166,6 +166,24 @@ function Work() {
     index: number
   } | null>(null)
 
+  const requestVideoFullscreen = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation()
+    const wrap = event.currentTarget.closest('.work__video-wrap') as (HTMLElement & {
+      webkitRequestFullscreen?: () => void
+    }) | null
+
+    if (!wrap) return
+
+    if (wrap.requestFullscreen) {
+      void wrap.requestFullscreen().catch(() => {
+        // Ignore rejection when fullscreen is blocked by browser policy.
+      })
+      return
+    }
+
+    wrap.webkitRequestFullscreen?.()
+  }
+
   const closeLightbox = () => setLightboxState(null)
 
   const showNextImage = () => {
@@ -260,6 +278,14 @@ function Work() {
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                             allowFullScreen
                           />
+                          <button
+                            type="button"
+                            className="work__video-fullscreen"
+                            onClick={requestVideoFullscreen}
+                            aria-label={`Open ${p.title} video in fullscreen`}
+                          >
+                            Fullscreen
+                          </button>
                         </div>
                       ) : null}
                       {p.images && p.images.length > 0 ? (
