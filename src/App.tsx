@@ -25,7 +25,7 @@ const projects = [
     description:
       'Developed a React Native + Expo mobile client with Osperity to improve how field operators consume monitoring data outside the desktop workflow. I built the map-centric experience using Google Maps API, including coordinate conversion, fast site lookup, and navigation paths that reduce interaction friction during active incidents. I also implemented live camera-view access and integrated external APIs with secure key handling. The result was a practical, production-style prototype presented at SAIT\'s Capstone Convention after a 3-month Agile delivery cycle.',
     tags: ['React Native', 'Expo', 'Google Maps API', 'AWS', 'GitHub', 'Jira'],
-    github: 'https://github.com/zander1650',
+    github: null,
     demo: null,
     video: 'https://www.youtube.com/embed/hRCyR5hYK3A?autoplay=1&mute=1&loop=1&playlist=hRCyR5hYK3A&controls=1&fs=1&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1',
     images: [
@@ -42,7 +42,7 @@ const projects = [
     description:
       'Presented at SAIT EmergEx with Carter Babin, Karina Chiste, and Zander Fields. We intentionally reduced scope from a full mesh network to a single reliable sensing node so we could ship a complete hardware-to-software loop in one term. The delivered prototype combines a Raspberry Pi Pico, analog moisture sensor, and radio link, then surfaces readings to a mobile app in near real time. This project emphasized engineering trade-offs, interface reliability, and building a stable foundation that can scale into the original multi-node architecture.',
     tags: ['Raspberry Pi Pico', 'IoT', 'Mobile App', 'Embedded Systems', '3D Printing'],
-    github: 'https://github.com/zander1650',
+    github: 'https://github.com/KarinaChiste/RootPrecisionFarming',
     demo: null,
     images: [
       { src: soilSenImg1, alt: 'SoilSen hardware prototype in 3D printed carrot enclosure' },
@@ -59,7 +59,7 @@ const projects = [
     description:
       'Built a privacy-focused password manager with React + TypeScript on the frontend and ASP.NET Core on the backend. Cryptographic operations run in-browser using PBKDF2 for key derivation and AES-GCM for encryption/decryption, so the API never receives plaintext credentials. The backend manages vault state, encrypted record persistence, and session token validation while remaining blind to secret values. I also implemented security-focused UX features: inactivity auto-lock, strong password generation, timed clipboard clearing after copy, and full CRUD workflows for encrypted entries.',
     tags: ['React', 'TypeScript', 'ASP.NET Core', 'PBKDF2', 'AES-GCM', 'Security'],
-    github: 'https://github.com/zander1650',
+    github: 'https://github.com/zander1650/PassmanagerV2',
     demo: null,
     images: [
       { src: passmanagerImg1, alt: 'Password manager encrypted vault dashboard' },
@@ -78,7 +78,7 @@ const projects = [
     description:
       'Built a cross-platform stock analysis application in C#, ML.NET, and .NET MAUI + Blazor with a clear service-oriented architecture. The system ingests historical price data, computes technical features (MA5/10/50, RSI, volatility, returns, volume), and trains a binary classifier to forecast next-period direction. I designed the pipeline to keep feature engineering, prediction logic, and UI concerns separate so the model can be iterated without rewriting the app. The model reaches realistic accuracy (~55-60%), which reflects market noise and helped frame results responsibly.',
     tags: ['C#', 'ML.NET', '.NET MAUI', 'Blazor', 'Time Series', 'AWS'],
-    github: 'https://github.com/zander1650',
+    github: 'https://github.com/zander1650/StockPredictionModel',
     demo: null,
     images: [
       { src: stockImg1, alt: 'Stock Prediction app dashboard screenshot' },
@@ -310,9 +310,11 @@ function Work() {
                     <ul className="work__tags">
                       {p.tags.map(t => <li key={t}>{t}</li>)}
                     </ul>
-                    <a href={p.github} className="work__link" target="_blank" rel="noopener noreferrer">
-                      Source →
-                    </a>
+                    {p.github ? (
+                      <a href={p.github} className="work__link" target="_blank" rel="noopener noreferrer">
+                        Source →
+                      </a>
+                    ) : null}
                   </div>
                 </div>
               </div>
